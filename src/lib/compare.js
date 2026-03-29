@@ -216,7 +216,6 @@ function compare(source, target, rulesList) {
 
     return true;
 }
-
 /**
  * Создает функцию сравнения с замыканием
  *

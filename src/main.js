@@ -83,7 +83,6 @@ const {applyPagination, updatePagination} = initPagination(
 );
 
 const {applyFiltering, updateIndexes} = initFiltering(sampleTable.filter.elements, {
-
 });
 
 const appRoot = document.querySelector('#app');

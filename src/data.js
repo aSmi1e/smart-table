@@ -28,7 +28,6 @@ export function initData(sourceData) {
         return { sellers, customers };
     }
 
-    // функция получения записей о продажах с сервера
     const getRecords = async (query, isUpdated = false) => {
         const qs = new URLSearchParams(query);
         const nextQuery = qs.toString();

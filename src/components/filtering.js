@@ -1,7 +1,7 @@
 import {createComparison, defaultRules} from "../lib/compare.js";
 
 export function initFiltering(elements, indexes) {
-    // @todo: #4.1 — заполнить выпадающие списки опциями
+
     const updateIndexes = (elements, indexes) => {
         Object.keys(indexes).forEach((elementName) => {
             elements[elementName].append(...Object.values(indexes[elementName]).map(name => {
