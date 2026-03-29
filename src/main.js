@@ -37,23 +37,7 @@ function collectState() {
  * Перерисовка состояния таблицы при любых изменениях
  * @param {HTMLButtonElement?} action
  */
-async function render(action) {
-    let state = collectState(); // состояние полей из таблицы
-    let query = {}; // копируем для последующего изменения
 
-    // @todo: использование
-
-    query = applySearching(query, state, action);
-    query = applyFiltering(query, state, action);
-    query = applySorting(query, state, action);
-    query = applyPagination(query, state, action);
-
-    const { total, items } = await API.getRecords(query);
-
-    updatePagination(total, query);
-
-    sampleTable.render(items)
-}
 
 const sampleTable = initTable({
     tableTemplate: 'table',
@@ -86,6 +70,22 @@ const {applyPagination, updatePagination} = initPagination(
 const {applyFiltering, updateIndexes} = initFiltering(sampleTable.filter.elements, {    // передаём элементы фильтра
                                       // для элемента с именем searchBySeller устанавливаем массив продавцов
 });
+
+async function render(action) {
+    let state = collectState();
+    let query = {};
+
+    query = applySearching(query, state, action);
+    query = applyFiltering(query, state, action);
+    query = applySorting(query, state, action);
+    query = applyPagination(query, state, action);
+
+    const { total, items } = await API.getRecords(query);
+
+    updatePagination(total, query);
+
+    sampleTable.render(items)
+}
 
 const appRoot = document.querySelector('#app');
 appRoot.appendChild(sampleTable.container);
