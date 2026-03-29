@@ -278,18 +278,18 @@ button.icon:hover,
     display: flex;
     align-items: center;
     gap: 8px;
-}
 
-button[data-value="none"] {
-    background-image: url("./assets/sort.svg");
-}
+    button[data-value="none"] {
+        background-image: url("./assets/sort.svg");
+    }
 
-button[data-value="up"] {
-    background-image: url("./assets/arrow-up.svg");
-}
+    button[data-value="up"] {
+        background-image: url("./assets/arrow-up.svg");
+    }
 
-button[data-value="down"] {
-    background-image: url("./assets/arrow-down.svg");
+    button[data-value="down"] {
+        background-image: url("./assets/arrow-down.svg");
+    }
 }
 
 /* Filter row */
@@ -305,12 +305,11 @@ button[data-value="down"] {
     position: relative;
     display: flex;
     width: 100%;
-}
 
-.icon {
-    background-image: url("./assets/clear.svg");
+    .icon {
+        background-image: url("./assets/clear.svg");
+    }
 }
-
 
 .filter-wrapper:has(.input:placeholder-shown) .icon {
     background-image: url("./assets/filter.svg");
@@ -413,11 +412,11 @@ button[data-value="down"] {
     cursor: pointer;
     transition: background-color var(--transition), color var(--transition);
     position: relative;
-}
 
-input {
-    position: absolute;
-    opacity: 0;
+    input {
+        position: absolute;
+        opacity: 0;
+    }
 }
 
 .pagination-button:hover {

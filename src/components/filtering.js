@@ -32,16 +32,36 @@ export function initFiltering(elements, indexes) {
         const filter = {};
         Object.keys(elements).forEach(key => {
             if (elements[key]) {
-                if (['INPUT', 'SELECT'].includes(elements[key].tagName) && elements[key].value) {
-                    filter[`filter[${elements[key].name}]`] = elements[key].value;
+                if (['INPUT', 'SELECT'].includes(elements[key].tagName) && elements[key].value) { // ищем поля ввода в фильтре с непустыми данными
+                    filter[`filter[${elements[key].name}]`] = elements[key].value; // чтобы сформировать в query вложенный объект фильтра
                 }
             }
         })
-        return Object.keys(filter).length ? Object.assign({}, query, filter) : query;
+        return Object.keys(filter).length ? Object.assign({}, query, filter) : query; // если в фильтре что-то добавилось, применим к запросу
     }
 
     return {
         updateIndexes,
         applyFiltering
     }
+
+    // return (data, state, action) => {
+
+    //     if (action?.name === 'clear') {
+    //         const parentElement = action.closest('.filter-field') ?? action.parentElement;
+    //         const inputField = parentElement?.querySelector('input[type="text"], input[type="search"]');
+    //         const fieldName = action.dataset.field;
+
+    //         if (inputField) {
+    //             inputField.value = '';
+    //             inputField.dispatchEvent(new Event('change', {bubbles: true}));
+    //         }
+
+    //         if (fieldName) {
+    //             state[fieldName] = '';
+    //         }
+    //     }
+
+    //     return data.filter(row => compare(row, state));
+    // }
 }
