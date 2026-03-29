@@ -279,7 +279,6 @@ button.icon:hover,
     align-items: center;
     gap: 8px;
 }
-
     button[data-value="none"] {
         background-image: url("./assets/sort.svg");
     }
@@ -307,12 +306,10 @@ button.icon:hover,
     display: flex;
     width: 100%;
 }
+
     .icon {
         background-image: url("./assets/clear.svg");
     }
-{
-
-}
 
 .filter-wrapper:has(.input:placeholder-shown) .icon {
     background-image: url("./assets/filter.svg");
@@ -421,9 +418,6 @@ button.icon:hover,
         position: absolute;
         opacity: 0;
     }
-{
-
-}
 
 .pagination-button:hover {
     background-color: var(--color-button-bg);

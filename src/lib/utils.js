@@ -67,8 +67,8 @@ export function processFormData(formData) {
  * вместо O(n) при переборе массива.
  */
 export const makeIndex = (arr, field, val) => arr.reduce((acc, cur) => ({
-    ...acc,
-    [cur[field]]: val(cur)
+    ...acc,  // Копируем все уже накопленные значения
+    [cur[field]]: val(cur)  // Добавляем новое поле с именем из cur[field] и значением из val(cur)
 }), {});
 
 /**
@@ -90,18 +90,21 @@ export const makeIndex = (arr, field, val) => arr.reduce((acc, cur) => ({
  * 3. Диапазон корректируется у краев (начало и конец списка страниц)
  */
 export function getPages(currentPage, maxPage, limit) {
-    currentPage = Math.max(1, Math.min(maxPage, currentPage));
-    limit = Math.min(maxPage, limit);
+    // Проверяем, что входные данные являются корректными числами
+    currentPage = Math.max(1, Math.min(maxPage, currentPage));  // currentPage должен быть от 1 до maxPage
+    limit = Math.min(maxPage, limit);  // limit не должен превышать maxPage
 
     // Вычисляем диапазон страниц для отображения
-    let start = Math.max(1, currentPage - Math.floor(limit / 2));
-    let end = start + limit - 1;
+    let start = Math.max(1, currentPage - Math.floor(limit / 2));  // Начинаем с currentPage минус половина лимита
+    let end = start + limit - 1;  // Заканчиваем через limit страниц после start
 
+    // Корректируем, если мы близко к концу
     if (end > maxPage) {
-        end = maxPage;
-        start = Math.max(1, end - limit + 1);
+        end = maxPage;  // Не выходим за пределы максимальной страницы
+        start = Math.max(1, end - limit + 1);  // Пересчитываем начало
     }
 
+    // Создаем массив номеров страниц
     const pages = [];
     for (let i = start; i <= end; i++) {
         pages.push(i);
