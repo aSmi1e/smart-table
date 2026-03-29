@@ -278,6 +278,7 @@ button.icon:hover,
     display: flex;
     align-items: center;
     gap: 8px;
+}
 
     button[data-value="none"] {
         background-image: url("./assets/sort.svg");
@@ -290,7 +291,7 @@ button.icon:hover,
     button[data-value="down"] {
         background-image: url("./assets/arrow-down.svg");
     }
-}
+
 
 /* Filter row */
 .filter-row {
@@ -305,10 +306,12 @@ button.icon:hover,
     position: relative;
     display: flex;
     width: 100%;
-
+}
     .icon {
         background-image: url("./assets/clear.svg");
     }
+{
+
 }
 
 .filter-wrapper:has(.input:placeholder-shown) .icon {
@@ -412,11 +415,14 @@ button.icon:hover,
     cursor: pointer;
     transition: background-color var(--transition), color var(--transition);
     position: relative;
+}
 
     input {
         position: absolute;
         opacity: 0;
     }
+{
+
 }
 
 .pagination-button:hover {
