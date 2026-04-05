@@ -9,6 +9,7 @@ import {processFormData} from "./lib/utils.js";
 import {initTable} from "./components/table.js";
 import { initPagination } from "./components/pagination.js";
 import { initSorting } from "./components/sorting.js";
+import { initFiltering } from "./components/filtering.js";
 
 // @todo: подключение
 const {data, ...indexes} = initData(sourceData);
@@ -42,18 +43,19 @@ function render(action) {
 
     result = applyPagination(result, state, action);
 
+    result = applyFiltering(result, state, action);
+
     sampleTable.render(result)
 }
 
 const sampleTable = initTable({
     tableTemplate: 'table',
     rowTemplate: 'row',
-    before: ['header'],
+    before: ['header', 'filter'],
     after: ['pagination']
 }, render);
 
 // @todo: инициализация
-
 const applySorting = initSorting([
     sampleTable.header.elements.sortByDate,
     sampleTable.header.elements.sortByTotal
@@ -70,6 +72,10 @@ const applyPagination = initPagination(
         return el;
     }
 );
+
+const applyFiltering = initFiltering(sampleTable.filter.elements, {
+    searchBySeller: indexes.sellers
+});
 
 const appRoot = document.querySelector('#app');
 appRoot.appendChild(sampleTable.container);
