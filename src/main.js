@@ -7,9 +7,10 @@ import {initData} from "./data.js";
 import {processFormData} from "./lib/utils.js";
 
 import {initTable} from "./components/table.js";
+import { initPagination } from "./components/pagination.js";
+import { initSorting } from "./components/sorting.js";
+
 // @todo: подключение
-
-
 const {data, ...indexes} = initData(sourceData);
 
 /**
@@ -19,8 +20,13 @@ const {data, ...indexes} = initData(sourceData);
 function collectState() {
     const state = processFormData(new FormData(sampleTable.container));
 
+    const rowsPerPage = parseInt(state.rowsPerPage);
+    const page = parseInt(state.page ?? 1);
+
     return {
-        ...state
+        ...state,
+        rowsPerPage,
+        page
     };
 }
 
@@ -32,7 +38,9 @@ function render(action) {
     let state = collectState();
     let result = [...data];
     // @todo: использование
+    result = applySorting(result, state, action);
 
+    result = applyPagination(result, state, action);
 
     sampleTable.render(result)
 }
@@ -40,12 +48,28 @@ function render(action) {
 const sampleTable = initTable({
     tableTemplate: 'table',
     rowTemplate: 'row',
-    before: [],
-    after: []
+    before: ['header'],
+    after: ['pagination']
 }, render);
 
 // @todo: инициализация
 
+const applySorting = initSorting([
+    sampleTable.header.elements.sortByDate,
+    sampleTable.header.elements.sortByTotal
+]);
+
+const applyPagination = initPagination(
+    sampleTable.pagination.elements,
+    (el, page, isCurrent) => {
+        const input = el.querySelector('input');
+        const label = el.querySelector('span');
+        input.value = page;
+        input.checked = isCurrent;
+        label.textContent = page;
+        return el;
+    }
+);
 
 const appRoot = document.querySelector('#app');
 appRoot.appendChild(sampleTable.container);
