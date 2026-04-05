@@ -10,6 +10,7 @@
  * в удобный объект для дальнейшего доступа к этим элементам.
  */
 export function cloneTemplate(templateId) {
+    // Находим шаблон в документе по его ID
     const template = document.getElementById(templateId);
 
     const clone = template.content.firstElementChild.cloneNode(true);

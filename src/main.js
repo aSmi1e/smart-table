@@ -12,7 +12,6 @@ import { initSorting } from "./components/sorting.js";
 import { initFiltering } from "./components/filtering.js";
 import { initSearching } from "./components/searching.js";
 
-
 const API = initData(sourceData);
 
 /**
@@ -41,10 +40,10 @@ async function render(action) {
     let query = {};
 
     // @todo: использование
+
     query = applySearching(query, state, action);
-
     query = applyFiltering(query, state, action);
-
+    query = applySorting(query, state, action);
     query = applyPagination(query, state, action);
 
     const { total, items } = await API.getRecords(query);
