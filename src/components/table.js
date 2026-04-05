@@ -15,7 +15,7 @@ export function initTable(settings, onAction) {
     before.reverse();
     before.forEach(subName => {
         root[subName] = cloneTemplate(subName);
-        root.container.append(root[subName].container);
+        root.container.prepend(root[subName].container);
     });
 
     after.forEach(subName => {
