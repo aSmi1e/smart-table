@@ -10,13 +10,14 @@
  */
 const sortUp = field => (a, b) => {
     if (a[field] > b[field]) {
-        return 1;  // Значение в a больше, чем в b, перемещаем a вправо
+        return 1;
     }
     if (a[field] < b[field]) {
-        return -1; // Значение в a меньше, чем в b, перемещаем a влево
+        return -1;
     }
-    return 0;      // Значения равны, сохраняем текущий порядок
+    return 0;
 }
+
 /**
  * Функция сортировки по убыванию для указанного поля объекта
  *
@@ -29,12 +30,12 @@ const sortUp = field => (a, b) => {
  */
 const sortDown = field => (a, b) => {
     if (a[field] < b[field]) {
-        return 1;  // Значение в a меньше, чем в b, перемещаем a вправо
+        return 1;
     }
     if (a[field] > b[field]) {
-        return -1; // Значение в a больше, чем в b, перемещаем a влево
+        return -1;
     }
-    return 0;      // Значения равны, сохраняем текущий порядок
+    return 0;
 }
 
 /**
@@ -45,8 +46,8 @@ const sortDown = field => (a, b) => {
  * сортировки в пользовательском интерфейсе.
  */
 const sortFn = {
-    up: sortUp,     // Сортировка по возрастанию
-    down: sortDown  // Сортировка по убыванию
+    up: sortUp,
+    down: sortDown
 };
 
 /**
@@ -58,9 +59,9 @@ const sortFn = {
  * по убыванию -> отсутствие сортировки и т.д.
  */
 export const sortMap = {
-    'none': 'up',    // Из "без сортировки" переходим в "по возрастанию"
-    'up': 'down',    // Из "по возрастанию" переходим в "по убыванию"
-    'down': 'none'   // Из "по убыванию" переходим в "без сортировки"
+    'none': 'up',
+    'up': 'down',
+    'down': 'none'
 }
 
 /**
@@ -84,5 +85,5 @@ export function sortCollection(arr, field, order) {
     if (field && order !== 'none' && sortMap[order])
         return arr.toSorted(sortFn[order](field));
     else
-        return arr;  // Возвращаем исходный массив без изменений, если сортировка не нужна
+        return arr;
 }

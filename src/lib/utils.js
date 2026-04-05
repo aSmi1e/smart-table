@@ -10,20 +10,15 @@
  * в удобный объект для дальнейшего доступа к этим элементам.
  */
 export function cloneTemplate(templateId) {
-    // Находим шаблон в документе по его ID
     const template = document.getElementById(templateId);
 
-    // Клонируем первый дочерний элемент шаблона вместе со всеми его потомками
     const clone = template.content.firstElementChild.cloneNode(true);
 
-    // Находим все элементы с атрибутом data-name и создаем объект,
-    // где ключами являются значения data-name, а значениями - сами элементы
     const elements = Array.from(clone.querySelectorAll('[data-name]')).reduce((acc, el) => {
         acc[el.dataset.name] = el;
         return acc;
     }, {});
 
-    // Возвращаем объект с контейнером (клоном шаблона) и именованными элементами
     return {
         container: clone,
         elements: elements
@@ -44,7 +39,6 @@ export function cloneTemplate(templateId) {
  * (как в случае с multiple select или checkbox).
  */
 export function processFormData(formData) {
-    // Преобразуем entries() в массив пар [ключ, значение] и создаем объект
     return Array.from(formData.entries()).reduce((result, [key, value]) => {
         result[key] = value;
         return result;
@@ -93,7 +87,6 @@ export function getPages(currentPage, maxPage, limit) {
     currentPage = Math.max(1, Math.min(maxPage, currentPage));
     limit = Math.min(maxPage, limit);
 
-    // Вычисляем диапазон страниц для отображения
     let start = Math.max(1, currentPage - Math.floor(limit / 2));
     let end = start + limit - 1;
 
